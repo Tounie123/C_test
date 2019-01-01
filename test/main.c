@@ -13,32 +13,32 @@
 
 void bitmapSort(char *a, int len)
 {
-    int length, max, min, i, index;
-    length = len;
-    min = max = a[0];
-    //找出数组最大值
-    for(i = 1; i < length; i++){
-        if(a[i] > max){
+    int length,max,min,i,index;
+    
+    //找出最大和最小值
+    max = min = a[0];
+    for (i = 1; i < len; i++) {
+        if (a[i] > max) {
             max = a[i];
-        }
-        if(min > a[i]) {
+        } else if (a[i] < min) {
             min = a[i];
         }
     }
+    //printf("max: %d, min: %d\n",max,min);
+    
     //得到位图数组
-    char *arr;
-    arr = (char *)malloc(max - min + 1);
+    char *arr = (char *)malloc(max - min + 1);
     memset(arr, 0, max - min + 1);
-    for(i = 0; i < length; i++){
+    for(i = 0; i < len; i++) {
         index = a[i] - min;
         arr[index]++;
     }
+    
     //重整a中的元素
-    int arr_length;
-    arr_length = max - min + 1;
+    length = max - min + 1;
     index = 0;
-    for(i = 0; i < arr_length; i++){
-        while (arr[i] > 0){
+    for (i = 0; i < length; i++){
+        while(arr[i] > 0) {
             a[index] = i + min;
             index++;
             arr[i]--;
